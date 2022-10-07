@@ -7,17 +7,28 @@
 }
  
 .spawn-locations {
+    text-transform: uppercase;
     position: absolute;
+    min-width: 30vh;
+    width: fit-content;
+    max-width: 35vh;
     top: 10vh;
     left: 10vh;
+    background-color: #161923f2;
+    border-radius: 5px;
+    box-shadow: rgb(0 0 0 / 16%) 0px 3px 6px, rgb(0 0 0 / 23%) 0px 3px 6px;
+    border-radius: .8vh;
+    padding: 30px;
+    cursor: default;
+    transition: 300ms;
 }
 
 .location {
-    background-color: rgba(10, 10, 10, 0.8);
-    width: 28vh;
-    height: 4.5vh;
-    margin-bottom: .75vh;
-    transition: 0.2s;
+    width: 100%;
+    margin-bottom: 15px;
+    transition: 200ms;
+    border-radius: .3vh;
+    cursor: pointer;
 }
 
 .location > p {
@@ -29,20 +40,21 @@
 }
 
 .location:hover {
-    background-color: #ff3737a6;
-    transition: 0.2s;
+    background-color: #a90d2ca6!important;
+    transition: 300ms;
 }
 
 .selected {
-    background-color: #b12424a6;
+    background-color: #a90d2ca6!important;
 }
 
 .submit-spawn {
-    background-color: rgba(32, 158, 16, 0.75);
-    width: 28vh;
-    height: 4.5vh;
-    margin-bottom: .75vh;
+    background-color: rgb(47 134 67)!important;
+    width: 100%;
+    margin-top: 1.5vh;
     transition: 0.2s;
+    border-radius: .3vh;
+    cursor: pointer;
 }
 
 .submit-spawn > p {
@@ -70,7 +82,6 @@
     height: 4.5vh;
     margin-bottom: .75vh;
     transition: 0.2s;
-    background-color: rgba(255, 255, 255, 0.75);
 }
 
 .loclabel > p {
@@ -78,7 +89,7 @@
     letter-spacing: 1px;
     font-weight: bold;
     position: relative;
-    color: black;
+    color: rgb(255, 255, 255);
     text-align: center;
     line-height: 4.5vh;
     font-size: 13px;

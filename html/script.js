@@ -17,6 +17,10 @@ $(document).ready(function() {
             setupLocations(data.locations, data.houses)
         }
 
+        if (data.action == "setupnewplayerLocations") {
+            setupnewplayerLocations(data.locations, data.houses)
+        }
+
         if (data.action == "setupAppartements") {
             setupApps(data.locations)
         }
@@ -90,7 +94,28 @@ function setupLocations(locations, myHouses) {
     }, 100)
 }
 
-function setupApps(apps) {
+function setupnewplayerLocations(locations, myHouses) {
+    var parent = $('.spawn-locations')
+    $(parent).html("");
+    $(parent).append('<div class="loclabel" id="location" data-location="null" data-type="lab" data-label="Where would you like to start?"><p><span id="null">Where would you like to start?</span></p></div>')
+
+    setTimeout(function() {
+        $.each(locations, function(index, location) {
+            $(parent).append('<div class="location" id="location" data-location="' + location.location + '" data-type="normal" data-label="' + location.label + '"><p><span id="' + location.location + '">' + location.label + '</span></p></div>')
+        });
+
+        if (myHouses != undefined) {
+            $.each(myHouses, function(index, house) {
+                $(parent).append('<div class="location" id="location" data-location="' + house.house + '" data-type="house" data-label="' + house.label + '"><p><span id="' + house.house + '">' + house.label + '</span></p></div>')
+            });
+        }
+
+        $(parent).append('<div class="submit-spawn" id="submit-spawn"><p><span id="spawn-label"></span></p></div>');
+        $('.submit-spawn').hide();
+    }, 100)
+}
+
+function setupnewLocations(apps) {
     var parent = $('.spawn-locations')
     $(parent).html("");
 

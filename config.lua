@@ -28,14 +28,24 @@ QB.Spawns = {
         location = "rhodesst",
         label = "Rhodes Sheriff Station",
     },
-    ["default"] = {
+    ["saintdenis"] = {
         coords = {
-            x = 2556.46,
-            y = -1159.73,
-            z = 53.7,
-            h = 137.05
+            x = 2570.54,
+            y = -1183.36,
+            z = 53.90,
+            h = 1.93
         },
-        location = "default",
-        label = "Default Spawn"
+        location = "saintdenis",
+        label = "Saint Denis"
+    },
+    ["valentine"] = {
+        coords = {
+            x = -232.08,
+            y = 795.68,
+            z = 124.62,
+            h = 120.97
+        },
+        location = "valentine",
+        label = "Valentine"
     }
 }

@@ -289,7 +289,7 @@ RegisterNetEvent('qr-spawn:client:setupSpawns', function(cData, new, apps)
         })
     else
         SendNUIMessage({
-            action = "setupLocations",
+            action = "setupnewplayerLocations",
             locations = QB.Spawns,
             houses = {},
         })

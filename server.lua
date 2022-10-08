@@ -29,7 +29,7 @@ Citizen.CreateThread(function()
 	TriggerClientEvent("qr-houses:client:setHouseConfig", -1, Config.Houses)
 end)
 
-exports['qr-core']:CreateCallback('qr-spawn:server:getOwnedHouses', function(source, cb, cid)
+QRCore.Functions.CreateCallback('qr-spawn:server:getOwnedHouses', function(source, cb, cid)
 	if cid ~= nil then
 		local houses = exports.ghmattimysql:executeSync('SELECT * FROM player_houses WHERE citizenid=@citizenid', {['@citizenid'] = cid})
 		if houses[1] ~= nil then

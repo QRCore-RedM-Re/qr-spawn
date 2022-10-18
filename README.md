@@ -1,11 +1,10 @@
 # qb-spawn
-Spawn Selector for QB-Core Framework :eagle:
+Spawn Selector for QR-Core Framework
 
 ## Dependencies
-- [qb-core](https://github.com/QRCore-framework/qb-core)
-- [qb-houses](https://github.com/QRCore-framework/qb-houses) - Lets player select the house
-- [qb-apartment](https://github.com/QRCore-framework/qb-apartment) - Lets player select the apartment
-- [qb-garages](https://github.com/QRCore-framework/qb-garages) - For house garages
+- [qr-core](https://github.com/QRCore-RedM-Re/qr-core)
+- [qr-appearance](https://github.com/QRCore-RedM-Re/qr-appearance) 
+- [qr-clothes](https://github.com/QRCore-RedM-Re/qr-clothes)
 
 ## Screenshots
 ![Spawn selector](https://i.imgur.com/NUyuI5y.jpeg)
@@ -15,19 +14,19 @@ Spawn Selector for QB-Core Framework :eagle:
 
 ## Installation
 ### Manual
-- Download the script and put it in the `[qb]` directory.
+- Download the script and put it in the `[qr]` directory.
 - Add the following code to your server.cfg/resouces.cfg
 ```
-ensure qb-core
-ensure qb-spawn
-ensure qb-apartments
-ensure qb-garages
+ensure qr-core
+ensure qr-spawn
+ensure qr-appearance
+ensure qr-clothes
 ```
 
 ## Configuration
 An example to add spawn option
 ```
-QB.Spawns = {
+QR.Spawns = {
     ["spawn1"] = { -- Needs to be unique
         coords = vector4(1.1, -1.1, 1.1, 180.0), -- Coords player will be spawned
         location = "spawn1", -- Needs to be unique

@@ -20,6 +20,7 @@ RegisterNetEvent('qr-spawn:client:openUI', function(value)
     end)
     Wait(500)
     SetDisplay(value)
+    
 end)
 
 RegisterNUICallback("exit", function(data)
@@ -55,7 +56,6 @@ RegisterNUICallback('setCam', function(data)
             cam2 = CreateCamWithParams("DEFAULT_SCRIPTED_CAMERA", PlayerData.position.x, PlayerData.position.y, PlayerData.position.z + camZPlus1, 300.00,0.00,0.00, 110.00, false, 0)
             PointCamAtCoord(cam2, PlayerData.position.x, PlayerData.position.y, PlayerData.position.z + pointCamCoords)
             SetCamActiveWithInterp(cam2, cam, cam1Time, true, true)
-            -- SetCamActiveWithInterp(camTo, camFrom, duration, easeLocation, easeRotation)
             if DoesCamExist(cam) then
                 DestroyCam(cam, true)
             end
@@ -65,6 +65,7 @@ RegisterNUICallback('setCam', function(data)
             PointCamAtCoord(cam, PlayerData.position.x, PlayerData.position.y, PlayerData.position.z + pointCamCoords2)
             SetCamActiveWithInterp(cam, cam2, cam2Time, true, true)
             SetEntityCoords(PlayerPedId(), PlayerData.position.x, PlayerData.position.y, PlayerData.position.z)
+            TriggerServerEvent("qr_appearance:LoadSkin")
         end)
     elseif type == "house" then
         local campos = Config.Houses[location].coords.enter
@@ -81,8 +82,9 @@ RegisterNUICallback('setCam', function(data)
         PointCamAtCoord(cam, campos.x, campos.y, campos.z + pointCamCoords2)
         SetCamActiveWithInterp(cam, cam2, cam2Time, true, true)
         SetEntityCoords(PlayerPedId(), campos.x, campos.y, campos.z)
+        TriggerServerEvent("qr_appearance:LoadSkin")
     elseif type == "normal" then
-        local campos = QB.Spawns[location].coords
+        local campos = QR.Spawns[location].coords
 
         cam2 = CreateCamWithParams("DEFAULT_SCRIPTED_CAMERA", campos.x, campos.y, campos.z + camZPlus1, 300.00,0.00,0.00, 110.00, false, 0)
         PointCamAtCoord(cam2, campos.x, campos.y, campos.z + pointCamCoords)
@@ -96,6 +98,7 @@ RegisterNUICallback('setCam', function(data)
         PointCamAtCoord(cam, campos.x, campos.y, campos.z + pointCamCoords2)
         SetCamActiveWithInterp(cam, cam2, cam2Time, true, true)
         SetEntityCoords(PlayerPedId(), campos.x, campos.y, campos.z)
+        TriggerServerEvent("qr_appearance:LoadSkin")
     elseif type == "appartment" then
         local campos = Apartments.Locations[location].coords.enter
 
@@ -111,6 +114,7 @@ RegisterNUICallback('setCam', function(data)
         PointCamAtCoord(cam, campos.x, campos.y, campos.z + pointCamCoords2)
         SetCamActiveWithInterp(cam, cam2, cam2Time, true, true)
         SetEntityCoords(PlayerPedId(), campos.x, campos.y, campos.z)
+        TriggerServerEvent("qr_appearance:LoadSkin")
     end
 end)
 
@@ -129,6 +133,7 @@ RegisterNUICallback('chooseAppa', function(data)
     SetCamActive(cam2, false)
     DestroyCam(cam2, true)
     SetEntityVisible(PlayerPedId(), true)
+    TriggerServerEvent("qr_appearance:LoadSkin")
 end)
 
 RegisterNUICallback('spawnplayer', function(data)
@@ -144,15 +149,6 @@ RegisterNUICallback('spawnplayer', function(data)
         SetEntityCoords(PlayerPedId(), PlayerData.position.x, PlayerData.position.y, PlayerData.position.z)
         SetEntityHeading(PlayerPedId(), PlayerData.position.w)
         FreezeEntityPosition(PlayerPedId(), false)
-
-        -- if insideMeta.house ~= nil then
-        --     local houseId = insideMeta.house
-        --     TriggerEvent('qr-houses:client:LastLocationHouse', houseId)
-        -- elseif insideMeta.apartment.apartmentType ~= nil or insideMeta.apartment.apartmentId ~= nil then
-        --     local apartmentType = insideMeta.apartment.apartmentType
-        --     local apartmentId = insideMeta.apartment.apartmentId
-        --     TriggerEvent('qr-apartments:client:LastLocationHouse', apartmentType, apartmentId)
-        -- end
         TriggerServerEvent('QRCore:Server:OnPlayerLoaded')
         TriggerEvent('QRCore:Client:OnPlayerLoaded')
         FreezeEntityPosition(ped, false)
@@ -164,6 +160,7 @@ RegisterNUICallback('spawnplayer', function(data)
         SetEntityVisible(PlayerPedId(), true)
         Wait(500)
         DoScreenFadeIn(250)
+        TriggerServerEvent("qr_appearance:LoadSkin")
     elseif type == "house" then
         SetDisplay(false)
         DoScreenFadeOut(500)
@@ -182,8 +179,9 @@ RegisterNUICallback('spawnplayer', function(data)
         SetEntityVisible(PlayerPedId(), true)
         Wait(500)
         DoScreenFadeIn(250)
+        TriggerServerEvent("qr_appearance:LoadSkin")
     elseif type == "normal" then
-        local pos = QB.Spawns[location].coords
+        local pos = QR.Spawns[location].coords
         SetDisplay(false)
         DoScreenFadeOut(500)
         Wait(2000)
@@ -204,10 +202,11 @@ RegisterNUICallback('spawnplayer', function(data)
         SetEntityVisible(PlayerPedId(), true)
         Wait(500)
         DoScreenFadeIn(250)
+        TriggerServerEvent("qr_appearance:LoadSkin")
     end
 
     if newPlayer then
-        TriggerEvent('qr-clothing:client:newPlayer')
+        TriggerServerEvent("qr_clothes:LoadClothes", 2)
         newPlayer = false
     end
 end)
@@ -237,7 +236,7 @@ RegisterNetEvent('qr-houses:client:setHouseConfig', function(houseConfig)
 end)
 
 RegisterNetEvent('qr-spawn:client:setupSpawnUI', function(cData, new)
-    if QB.EnableApartments then
+    if QR.EnableApartments then
         QRCore.Functions.TriggerCallback('apartments:GetOwnedApartment', function(result)
             if result ~= nil then
                 TriggerEvent('qr-spawn:client:setupSpawns', cData, false, nil)
@@ -257,7 +256,7 @@ end)
 RegisterNetEvent('qr-spawn:client:setupSpawns', function(cData, new, apps)
     newPlayer = new
     if not new then
-        if QB.EnableHouses then
+        if QR.EnableHouses then
             QRCore.Functions.TriggerCallback('qr-spawn:server:getOwnedHouses', function(houses)
                 local myHouses = {}
                 if houses ~= nil then
@@ -272,18 +271,18 @@ RegisterNetEvent('qr-spawn:client:setupSpawns', function(cData, new, apps)
                 Wait(500)
                 SendNUIMessage({
                     action = "setupLocations",
-                    locations = QB.Spawns,
+                    locations = QR.Spawns,
                     houses = myHouses,
                 })
             end, cData.citizenid)
         else
             SendNUIMessage({
                 action = "setupLocations",
-                locations = QB.Spawns,
+                locations = QR.Spawns,
                 houses = {},
             })
         end
-    elseif new and QB.EnableApartments then
+    elseif new and QR.EnableApartments then
         SendNUIMessage({
             action = "setupAppartements",
             locations = apps,
@@ -291,7 +290,7 @@ RegisterNetEvent('qr-spawn:client:setupSpawns', function(cData, new, apps)
     else
         SendNUIMessage({
             action = "setupnewplayerLocations",
-            locations = QB.Spawns,
+            locations = QR.Spawns,
             houses = {},
         })
     end

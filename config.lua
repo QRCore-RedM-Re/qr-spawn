@@ -1,12 +1,12 @@
-QB = {}
+QR = {}
 
 -- Enable spawning inside houses from the spawn selector
-QB.EnableHouses = false
+QR.EnableHouses = false
 
 -- Enable spawning inside apartments from the spawn selector
-QB.EnableApartments = false
+QR.EnableApartments = false
 
-QB.Spawns = {
+QR.Spawns = {
     ["emerald"] = {
         coords = {
             x = 1417.818,
@@ -40,10 +40,10 @@ QB.Spawns = {
     },
     ["valentine"] = {
         coords = {
-            x = -232.08,
-            y = 795.68,
-            z = 124.62,
-            h = 120.97
+            x = -366.75,
+            y = 725.43,
+            z = 115.47,
+            h = 351.991
         },
         location = "valentine",
         label = "Valentine"

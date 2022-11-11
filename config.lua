@@ -17,16 +17,15 @@ QR.Spawns = {
         location = "emerald",
         label = "Emerald Ranch Fence",
     },
-
-    ["rhodesst"] = {
+    ["rhodes"] = {
         coords = {
-            x = 1359.575,
-            y = -1301.451,
-            z = 77.76775,
-            h = 3.5
+            x = 1247.5914,
+            y = -1291.584,
+            z = 74.944152,
+            h = 301.54714
         },
-        location = "rhodesst",
-        label = "Rhodes Sheriff Station",
+        location = "rhodes",
+        label = "Rhodes",
     },
     ["saintdenis"] = {
         coords = {
